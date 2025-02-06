@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -19,8 +20,6 @@ public class Order {
     private Long id_order; // atributo llave
 
     private String customer_name;
-
-    private float total_price;
 
     private String phone;
 
@@ -38,9 +37,9 @@ public class Order {
 
     private String state; // estado = confirmado, entregado, en camino, atendido
 
-    private LocalDate order_date; // fecha de compra
+    private LocalDateTime order_date; // fecha de compra
 
-    private LocalDate delivery_date; // fecha de entrega
+    private LocalDateTime delivery_date; // fecha de entrega
 
     private float shipping_cost; // costo de envio
 

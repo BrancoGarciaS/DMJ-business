@@ -3,7 +3,6 @@ package com.example.delivery_dmj.Services;
 import com.example.delivery_dmj.Entities.Rating;
 import com.example.delivery_dmj.Repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,6 +24,13 @@ public class RatingService {
     }
 
     public Rating saveRating(Rating rating) {
+        Optional<Rating> r = ratingRepository.findRatingByUsername(rating.getUsername());
+        if(rating.getUsername() != null && r.isPresent()) {
+            // si el comentario es de un username que ya comentó, se actualiza (para evitar que un mismo usuario
+            // haga 2 comentarios)
+            Rating r_username = r.get();
+            return updateRating(r_username);
+        }
         rating.setLikes(0); // inicialmente el comentario tiene 0 likes
         rating.setCreated_at(LocalDateTime.now()); // se rellena automaticamente con la fecha actual de creación
         return ratingRepository.save(rating);
@@ -39,6 +45,5 @@ public class RatingService {
 
     public void deleteRating(Long id) {
         ratingRepository.deleteById(id);
-
     }
 }
