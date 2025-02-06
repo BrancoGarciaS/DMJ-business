@@ -1,10 +1,10 @@
-package com.dmj.business_backend;
+package com.example.delivery_dmj;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BusinessBackendApplicationTests {
+class DeliveryDmjApplicationTests {
 
 	@Test
 	void contextLoads() {
