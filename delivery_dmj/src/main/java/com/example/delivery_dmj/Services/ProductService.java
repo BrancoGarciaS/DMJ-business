@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -34,6 +35,14 @@ public class ProductService {
 
     public ArrayList<Product> getProducts() {
         return (ArrayList<Product>) productRepository.findAll();
+    }
+
+    public Optional<Product> getProductById(Long id) {
+        return productRepository.findById(id);
+    }
+
+    public void deleteProductById(Long id) {
+        productRepository.deleteById(id);
     }
 
 
