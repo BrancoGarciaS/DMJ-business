@@ -16,13 +16,11 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    @ResponseBody
     public ArrayList<Product> getProducts() {
         return productService.getProducts();
     }
 
     @PostMapping
-    @ResponseBody
     public Product postProducts(@RequestBody Product product){
         return productService.saveProducts(product);
     }

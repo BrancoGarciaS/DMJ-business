@@ -19,9 +19,13 @@ public class Rating { // Valoraciones a los productos
 
     private int stars;
 
-    private String comment; // Color asociado a la variación
+    private String gender;
+
+    private String comment; // Comentario asociado a la valoración
 
     private Long id_user; // Usuario
+
+    private String username; // Usuario que comenta
 
     private Integer likes; // Me gustas al comentario
 

@@ -15,13 +15,11 @@ public class LocationController {
     LocationService locationService;
 
     @GetMapping
-    @ResponseBody
     public ArrayList<Location> getLocations() {
         return locationService.getLocations();
     }
 
     @PostMapping
-    @ResponseBody
     public Location postLocations(@RequestBody Location location){
         return locationService.saveLocations(location);
     }

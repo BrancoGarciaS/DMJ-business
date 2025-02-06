@@ -26,6 +26,8 @@ public class Order {
 
     private String email;
 
+    private String gender; // Genero del cliente
+
     private String region;
 
     private String city;
