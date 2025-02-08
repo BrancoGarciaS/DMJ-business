@@ -21,7 +21,6 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     public Product saveProducts(Product product) {
-        // Asocia las categorías por su ID
         Set<Category> categories = new HashSet<>();
         for (Category category : product.getCategories()) {
             Category categoryFromDb = categoryRepository.findById(category.getId_category()).orElse(null);
@@ -29,6 +28,7 @@ public class ProductService {
                 categories.add(categoryFromDb);
             }
         }
+        product.setPrice(product.getPrice() - product.getPrice() * (product.getDiscount()/100));
         product.setCategories(categories);
         return productRepository.save(product);
     }

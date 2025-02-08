@@ -16,4 +16,6 @@ public class Category {
     private Long id_category; // llave primaria
 
     private String name; // Nombre de la categoría
+
+    private float additional_cost; // costo adicional asociado a la categoría
 }

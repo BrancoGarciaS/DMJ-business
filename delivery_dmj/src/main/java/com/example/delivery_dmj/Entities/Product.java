@@ -21,6 +21,9 @@ public class Product {
     private String product_name;
     private String description;
     private float price;
+    private float original_price;
+
+    private float star_rating;
 
     // Relación muchos a muchos con Category
     @ManyToMany
