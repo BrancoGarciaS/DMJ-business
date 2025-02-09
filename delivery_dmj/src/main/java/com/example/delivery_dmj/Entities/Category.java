@@ -18,4 +18,6 @@ public class Category {
     private String name; // Nombre de la categoría
 
     private float additional_cost; // costo adicional asociado a la categoría
+
+    private String color; // color de la categoria
 }
