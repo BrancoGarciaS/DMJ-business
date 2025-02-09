@@ -127,7 +127,7 @@ const Products = () => {
 
     return (
         <div className="flex flex-1 h-full p-2">
-            <div className="w-2/3 justify-center items-center flex flex-1 flex-col">
+            <div className="w-1/2 justify-center items-center flex flex-1 flex-col">
                 {/* Lista de categorías para filtrar */}
                 <div className="flex justify-center items-center space-x-4 mb-4">
                     <span className="whitespace-nowrap">Filtrar por Categoría:</span>
@@ -169,7 +169,11 @@ const Products = () => {
 
                         return (
                             <div
-                                className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300"
+                                className={`rounded-xl bg-white p-3 shadow-lg duration-300 ${
+                                    cart.some((cartItem) => cartItem.id_product === product.id_product)
+                                        ? "shadow-xl scale-105 border-2 border-blue-500"
+                                        : "hover:shadow-xl hover:transform hover:scale-105"
+                                }`}
                                 key={product.id_product}
                             >
                                 <div className="relative flex items-end overflow-hidden rounded-xl">
@@ -241,7 +245,7 @@ const Products = () => {
                                             </svg>
 
                                             <button
-                                                className="bg-blue-500 px-3 py-1.5 text-white rounded-lg hover:bg-blue-600"
+                                                className="bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                                                 onClick={() => addToCart(product)}
                                             >
                                                 Añadir a carrito
@@ -258,7 +262,7 @@ const Products = () => {
 
             {/* Carrito de compras */}
              {/* Carrito de compras */}
-             <div className="w-1/3 p-4 bg-white shadow-lg rounded-lg">
+             <div className="w-2/5 p-4 bg-white shadow-lg rounded-lg">
                 <h2 className="text-lg font-bold mb-4">Carrito de Compras</h2>
                 {cart.length === 0 ? (
                     <p className="text-gray-500">El carrito está vacío</p>
@@ -285,7 +289,15 @@ const Products = () => {
                                             className="px-2 bg-gray-300 rounded"
                                             onClick={() => updateQuantity(item.id_product, -1)}
                                         >-</button>
-                                        <span className="px-2">{item.quantity}</span>
+                                        <input
+                                            type="number"
+                                            className="w-12 text-center border rounded"
+                                            value={item.quantity}
+                                            onChange={(e) => {
+                                                const newQuantity = Math.max(1, parseInt(e.target.value) || 1); 
+                                                updateQuantity(item.id_product, newQuantity - item.quantity);
+                                            }}
+                                        />
                                         <button
                                             className="px-2 bg-gray-300 rounded"
                                             onClick={() => updateQuantity(item.id_product, 1)}
