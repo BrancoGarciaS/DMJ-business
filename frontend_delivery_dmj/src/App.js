@@ -11,6 +11,9 @@ import Products from './pages_admin/products';
 import Experimento from './pages_admin/experimento';
 import Products2 from './pages_admin/products2';
 import Cart from './pages_admin/cart';
+import ProductsList from './pages_admin/a_productsList';
+import Products_List from './pages_customer/products_list';
+import R from './pages_customer/r';
 // instalar: npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
 
 const App = () => {
@@ -28,6 +31,13 @@ const App = () => {
 
             <Route path="/exp" element={<Experimento />} />
             <Route path="/cart" element={<Cart />} />
+
+            <Route path="/productos" element={<ProductsList />} />
+
+            <Route path="/list" element={<Products_List />} />
+
+
+            <Route path="/r" element={<R />} />
           </Routes>
         </div>
       </div>
