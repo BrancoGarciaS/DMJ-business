@@ -1,7 +1,9 @@
 package com.example.delivery_dmj.Services;
 
 import com.example.delivery_dmj.Entities.Rating;
+import com.example.delivery_dmj.Entities.User;
 import com.example.delivery_dmj.Repositories.RatingRepository;
+import com.example.delivery_dmj.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class RatingService {
     @Autowired
     RatingRepository ratingRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<Rating> getAllRatings() {
         return ratingRepository.findAll();
@@ -24,15 +28,29 @@ public class RatingService {
     }
 
     public Rating saveRating(Rating rating) {
-        Optional<Rating> r = ratingRepository.findRatingByUsername(rating.getUsername());
-        if(rating.getUsername() != null && r.isPresent()) {
-            // si el comentario es de un username que ya comentó, se actualiza (para evitar que un mismo usuario
-            // haga 2 comentarios)
-            Rating r_username = r.get();
+        // Verifica si el usuario existe
+        Optional<User> userOptional = userRepository.findById(rating.getUser().getId_user());
+
+        if (userOptional.isEmpty()) {
+            throw new RuntimeException("User not found with ID: " + rating.getUser().getId_user());
+        }
+
+        // Asigna el usuario encontrado a la valoración
+        rating.setUser(userOptional.get());
+        rating.setUsername(rating.getUser().getUsername());
+
+        // Validación para evitar que un mismo usuario comente varias veces
+        Optional<Rating> existingRating = ratingRepository.findRatingByUsername(rating.getUsername());
+        if (existingRating.isPresent()) {
+            Rating r_username = existingRating.get();
+            r_username.setComment(rating.getComment());
+            r_username.setStars(rating.getStars());
             return updateRating(r_username);
         }
-        rating.setLikes(0); // inicialmente el comentario tiene 0 likes
-        rating.setCreated_at(LocalDateTime.now()); // se rellena automaticamente con la fecha actual de creación
+
+        rating.setLikes(0); // Inicializa los "me gusta" en 0
+        rating.setCreated_at(LocalDateTime.now()); // Fecha de creación automática
+
         return ratingRepository.save(rating);
     }
 

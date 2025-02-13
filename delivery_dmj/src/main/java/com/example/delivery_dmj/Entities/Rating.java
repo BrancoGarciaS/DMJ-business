@@ -19,11 +19,7 @@ public class Rating { // Valoraciones a los productos
 
     private int stars;
 
-    private String gender;
-
     private String comment; // Comentario asociado a la valoración
-
-    private Long id_user; // Usuario
 
     private String username; // Usuario que comenta
 
@@ -34,5 +30,9 @@ public class Rating { // Valoraciones a los productos
     private LocalDateTime updated_at; // fecha de edición del comentario
 
     // Nota: agregar productos favoritos del usuario
+
+    @ManyToOne
+    @JoinColumn(name = "id_user", nullable = false) // Clave foránea
+    private User user;
 
 }

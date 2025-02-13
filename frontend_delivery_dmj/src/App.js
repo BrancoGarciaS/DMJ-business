@@ -14,6 +14,7 @@ import Cart from './pages_admin/cart';
 import ProductsList from './pages_admin/a_productsList';
 import Products_List from './pages_customer/products_list';
 import R from './pages_customer/r';
+import Reviews from './pages_customer/reviews';
 // instalar: npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
 
 
             <Route path="/r" element={<R />} />
+            <Route path="/reviews" element={<Reviews />} />
           </Routes>
         </div>
       </div>
