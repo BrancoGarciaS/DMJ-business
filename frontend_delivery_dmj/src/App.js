@@ -15,7 +15,12 @@ import ProductsList from './pages_admin/a_productsList';
 import Products_List from './pages_customer/products_list';
 import R from './pages_customer/r';
 import Reviews from './pages_customer/reviews';
+import Delivery_cost from './pages_admin/delivery_costs';
+import Chat from './pages_admin/chat';
+import Chat_exp from './pages_admin/chat_experimental';
+import UserLocationForm from './pages_customer/purchase';
 // instalar: npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+
 
 const App = () => {
   return (
@@ -40,6 +45,15 @@ const App = () => {
 
             <Route path="/r" element={<R />} />
             <Route path="/reviews" element={<Reviews />} />
+
+            <Route path="/delivery_cost" element={<Delivery_cost />} />
+            <Route path="/chat" element={<Chat />} />
+
+            <Route path="/experimento" element={<Chat_exp />} />
+
+            <Route path="/compra" element={<UserLocationForm />} />
+
+            
           </Routes>
         </div>
       </div>
